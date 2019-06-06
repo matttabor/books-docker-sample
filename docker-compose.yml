@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  api:
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./services/api
+    links:
+      - db
+  db:
+    image: mongo
+    volumes:
+        - .data/mdata:/data/db
+  nginx:
+      restart: always
+      build:
+        dockerfile: Dockerfile.dev
+        context: ./services/nginx
+      ports:
+        - '3051:80'
