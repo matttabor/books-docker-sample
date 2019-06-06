@@ -8,7 +8,9 @@ services:
     links:
       - db
   db:
-    image: mongo
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./services/db
     volumes:
         - .data/mdata:/data/db
   nginx:
